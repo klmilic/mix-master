@@ -27,6 +27,11 @@ module.exports = {
         secure: false,
         
       },
+      '/favorites': {
+        target: 'http://localhost:3000',
+        secure: false,
+        
+      },
     },
     historyApiFallback: true,
   },

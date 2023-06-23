@@ -1,4 +1,5 @@
 // const User = require('../models/mongoModel.js');
+const db = require('../models/SQLModel');
 
 const favoritesController = {};
 
@@ -14,46 +15,43 @@ const favoritesController = {};
 //   );
 // };
 
-// // display favorites
-// // query database to show list of user's favorite drink recipes
-// // find by userId, return the favorites
-// favoritesController.getFavorites = (req, res, next) => {
-//   // TEST WHERE USER ID IS COMING FROM  (body? params?)
-//   const userID = req.params.id;
-//   User.findOne({ userID }, (err, user) => {
-//     if (err) {
-//       return next(err); // update to invoke global error handler
-//     } else {
-//       // add found user to response object
-//       res.locals.user = user;
-//       next();
-//     }
-//   });
-// };
 
-// // add recipe to favorites
-// favoritesController.addRecipe = (req, res, next) => {
-//   const userId = 1;
-//   User.findOneAndUpdate(
-//     { userId: userId },
-//     {
-//       favorites: [
-//         {
-//           ingredients: ['vodka', 'lime'],
-//           instructions: 'Make a drink',
-//           name: 'Lime vodka soda',
-//         },
-//       ],
-//     }
-//   ).then(
-//     (res) => {
-//       console.log(res);
-//       next();
-//     },
-//     (err) => {
-//       next(err);
-//     }
-//   );
-// };
+favoritesController.getFavorites = async (req, res, next) => {
+    const { username } = req.params;
+    const values = [username];
+  
+    const query = `SELECT favourites
+    FROM users
+    WHERE userid = $1`
+  
+    try {
+      const { rows } = await db.query(query, values);
+      console.log('successfully retrieved favorites');
+      res.locals.favorites = rows;
+      next();
+    } catch (err) {
+      console.log('Error retrieving favorites: ', err);
+      next(err);
+    }
+};
+
+// add recipe to favorites
+favoritesController.addRecipe = async (req, res, next) => {
+  const { cocktailName } = req.body;
+  const values = [cocktailName];
+
+  const query = `UPDATE users
+  SET favourites = array_append(users.favourites, $1)
+  WHERE userid = 40`
+
+  try {
+    const { rows } = await db.query(query, values);
+    console.log('successfully added cocktail to favorites list');
+    next();
+  } catch (err) {
+    console.log('Error adding recipe to database: ', err);
+    next(err);
+  }
+};
 
 module.exports = favoritesController;

@@ -6,8 +6,12 @@ const router = express.Router();
 //   res.status(200).json(res.locals.user)
 // );
 
-// router.post('/addRecipe', favoritesController.addRecipe, (req, res) => {
-//   res.status(200).json();
-// });
+router.get('/getFavorites/:username', favoritesController.getFavorites, (req, res) => {
+    res.status(200).json(res.locals.favorites);
+  });
+
+router.post('/addRecipe', favoritesController.addRecipe, (req, res) => {
+  res.status(200).json();
+});
 
 module.exports = router;

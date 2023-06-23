@@ -4,14 +4,33 @@ import { FaStar } from "react-icons/fa";;
 function RecipeCard(props) {
   const [isStarred, setIsStarred] = useState(false);
 
+  const handleClick = (cocktailName) => {
+    isStarred ? setIsStarred(false) : setIsStarred(true);
+    fetch('/favorites/addRecipe', {
+			method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        cocktailName: cocktailName
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => console.log('Error in adding cocktail to favorites: ', err))
+  }
+
   return (
     <div className='recipe-card'>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
           <h2>{props.recipeData.name}</h2> 
-          <FaStar
+          {/* <FaStar
           style={{ marginLeft: "10px", cursor: "pointer", color: isStarred ? "gold" : "grey" }}
-          onClick={() => setIsStarred(!isStarred)}
-          />
+          onClick={() => handleClick(props.recipeData.name)}
+          /> */}
         </div>
         <ul><strong>Ingredients:</strong>
         {props.recipeData.ingredients.map(ing => (
