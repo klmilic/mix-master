@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function SideBar() {
+function Sidebar() {
 
   const handleClick = () => {
     window.location.reload();
@@ -11,7 +11,7 @@ function SideBar() {
     <div id='sideBar'>
       <div className='sideBarButton'>
         <Link to="/">
-          <button onClick={handleClick}>Home</button>
+          <button>Home</button>
         </Link>
         <Link to="/favorites">
           <button>Favorites</button>
@@ -22,4 +22,4 @@ function SideBar() {
   )
 }
 
-export default SideBar;
+export default Sidebar;

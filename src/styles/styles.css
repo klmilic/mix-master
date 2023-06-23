@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle&family=MedievalSharp&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@500&display=swap');
 
+/* * {
+  font-family: 'Monserrat', sans-serif;
+} */
+
 body {
   margin: 0px;
-  background-color: rgb(45, 18, 59);
+  background-color: rgb(255, 255, 255);
   /* background: linear-gradient(0deg, rgba(42,42,42,1) 0%, rgba(0,0,0,1) 100%); */
 }
 
 #root {
-  height: 99vh;
+  height: 100%;
   margin: .5vh;
-  
 }
 
 .sideBarButton button {
@@ -28,24 +31,37 @@ body {
 }
 
 .sideBarButton button:hover {
-  background-color: black;
+  background-color: rgb(56, 55, 55);
   border-radius: 4px;
 }
 
-#app {
+/* #app {
     display: flex;
     height:100%;
     gap: 2px;
-    
+} */
+
+#app {
+  min-height: 100vh;
 }
 
 #sideBar {
   height: 100%;
-  width: 15%;
+  width: 200px;
   border: none;
-  border-radius: 20px;
   background-color: rgb(24, 24, 27);
   box-shadow: 0px 0px 7px rgb(0, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.favContainer {
+  display: flex;
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  margin-left: 200px;
 }
 
 .sideBarButton {
@@ -57,7 +73,17 @@ body {
 }
 
 button {
-  cursor: pointer;
+  background-color: rgb(45, 45, 45);
+	border: none;
+	color: white;
+	padding: 12px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+  border-radius: 8px;
 }
 
 .favButtons {
@@ -66,25 +92,81 @@ button {
 }
 
 #mainContainer {
-    height: 100%;
-    width: 85%;
+    height: 100vh;
+    /* position: fixed;
     border: none;
-    border-radius: 20px;
-    overflow: auto;
+    border-radius: 20px; */
     display: flex;
-    align-items: center;
-    justify-content:  center;
-    flex-direction: row;
-    background-image: url("https://www.japantimes.co.jp/wp-content/uploads/2022/05/np_file_159307.jpeg");
+    /* background-image: url("https://www.japantimes.co.jp/wp-content/uploads/2022/05/np_file_159307.jpeg"); */
     background-size: auto 100%;
     background-position: center center;
-    box-shadow: 0px 0px 7px rgb(0, 0, 0);
-    flex-wrap: wrap;
+    /* box-shadow: 0px 0px 7px rgb(0, 0, 0); */
+}
+
+.mainSection {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; */
+  margin-left: 200px;
+  width: 100vw;
+  min-width: 800px;
+}
+
+h2 {
+  color: black;
+  font-size: 24px;
+  margin: 0;
+  margin-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#favorites {
+  margin-top: 200px;
+  width: 500px;
+  margin-left: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+
+.btnContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btnContainer button {
+  background-color: rgb(28, 27, 27);
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+  border-radius: 8px;
+}
+
+.btnContainer button:hover {
+  background-color: rgb(84, 84, 85);
+}
+
+.mainSection.activeMainSection {
+  /* display: flex;
+  flex-direction: column; */
+  /* justify-content: center;
+  align-items: center; */
 }
 
 .searchItems{
-  background-color: pink;
-  width: 50vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,7 +181,7 @@ button {
   width: 50vw;
   font-size: 16px;
   outline: none;
-  border: none;
+  border: .5px grey solid;
   border-radius: 20px;
   padding-left: 10px;
   box-sizing: border-box;
@@ -108,27 +190,35 @@ button {
   padding: 10px;
 }
 
+#recipes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
 .searchInput.active{
-  width: 50%;
+  /* width: 50%;
   outline: none;
   position: fixed;
   top: 8px;
   order: 1;
   font-family: 'Inter', sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 20px; */
 }
 
-#recipeContainer {
-  display: flex;
-  flex-direction: row;
+#recipe-container {
+  /* display: flex;
   flex-wrap: wrap;
   gap: 5px;
+  margin-top: 10px; */
   /* padding-top: 30px; */
 }
 
 .recipe-card {
-  width: 47%;
-  height: auto;
+  width: 30vw;
+  min-width: 320px;
+  /* height: auto; */
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -156,23 +246,40 @@ button {
 .loginPage {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
+  align-items: flex-start;
+  justify-content: center;
+  height: 60vh;
+  width: 50%;
+  margin-left: 40%;
+  gap: 20px;
 }
 
 .loginPage input {
-  width: 100px;
+  width: 170px;
+  height: 25px;
+  padding: 5px;
+  border: .5px grey solid;
+  border-radius: 4px;
 }
 
 /* Sign Up **/
 .signupPage {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
+  height: 60vh;
+  width: 50%;
+  margin-left: 40%;
+  gap: 20px;
 }
 
 .signupPage input {
-  width: 100px;
+  width: 170px;
+  height: 25px;
+  padding: 5px;
+  border: .5px grey solid;
+  border-radius: 4px;
 }
 
 .img-container {

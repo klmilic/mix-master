@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const loginRouter = require('./routers/loginRouter');
 const favoritesRouter = require('./routers/favoritesRouter');
+require('dotenv').config();
 
 const PORT = process.env.PORT | 3000;
 

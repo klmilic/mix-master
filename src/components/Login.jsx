@@ -1,50 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-// const loginUser = async credentials => {
-//     const data = await fetch('/api/login', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(credentials)
-//     })
-//     return data;
-// }
-
-function Login (props) {
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
-
-//   const loginFunc = () => {
-//     fetch('/login', {
-// 			method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//           body: JSON.stringify({
-// 						userName: document.getElementById('').value,
-//             password:
-// 					}),
-//     })
-//   }
+function Login ({ setLoggedIn }) {
+    const username = useRef();
+    const password = useRef();
+    let navigate = useNavigate();
 
     const handleClick = async e => {
-        const token = await loginUser({
-            username,
-            password
-        });
-        props.setLoggedIn(token);
+        fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username.current.value,
+                password: password.current.value
+            }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data === true) {
+                    navigate('/');
+                    setLoggedIn(true);
+                }
+                else {
+                    alert('Wrong username or password');
+                }
+            })
+            .catch(err => console.log(err))
+
+        // const token = await loginUser({
+        //     username,
+        //     password
+        // });
+        // props.setLoggedIn(token);
     }
 
     return(
     <div className='loginPage'>
-        <input id='usernameInput' placeholder='Username' onChange={e => setUsername(e.target.value)}></input>
-        <input placeholder='Password' onChange={e => setPassword(e.target.value)} ></input>
+        <h2>Login to Mix Master</h2>
+        <input ref={username} id='usernameInput' placeholder='Username'></input>
+        <input ref={password} type="password" name="password" placeholder='Password'></input>
+        <button onClick={handleClick}>Login</button>
         <div>
-            <button onClick={handleClick}>Login</button>
+            <span>Don't have an account?   </span>
             <Link to="/signup">
-            <button>Sign Up</button>
+                <a>Sign Up</a>
             </Link> 
         </div>
     </div>

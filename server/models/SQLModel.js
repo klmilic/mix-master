@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // model for SQL database
 const { Pool } = require('pg');
 

@@ -13,7 +13,7 @@ function RecipeCard(props) {
           onClick={() => setIsStarred(!isStarred)}
           />
         </div>
-        <ul>Ingredients:
+        <ul><strong>Ingredients:</strong>
         {props.recipeData.ingredients.map(ing => (
           <li>{ing}</li>
         ))}
