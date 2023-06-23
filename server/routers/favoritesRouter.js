@@ -6,7 +6,7 @@ const router = express.Router();
 //   res.status(200).json(res.locals.user)
 // );
 
-router.get('/getFavorites/:username', favoritesController.getFavorites, (req, res) => {
+router.get('/getFavorites', favoritesController.getFavorites, (req, res) => {
     res.status(200).json(res.locals.favorites);
   });
 

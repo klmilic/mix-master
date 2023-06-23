@@ -19,7 +19,7 @@ function RecipeContainer(props) {
     fetch(`https://api.api-ninjas.com/v1/cocktail?ingredients=${props.search}`, options)
       .then(response => response.json())
       .then(data => {
-        console.log('data: ', data)
+        // console.log('data: ', data)
         setData(data);
       })
       .catch(err => {

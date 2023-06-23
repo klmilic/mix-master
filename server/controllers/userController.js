@@ -43,6 +43,7 @@ userController.createUser = async (req, res, next) => {
             VALUES ($1, $2)`;
       const data = await db.query(hashQuery, hashValues)
       res.locals.token = true;
+      res.cookie('username', username);
       next();
     }
     next();
@@ -106,6 +107,7 @@ userController.verifyUser = async (req, res, next) => {
     };
     // if they match, store something in res.locals for postman result and proceed to next middleware
     res.locals.result = true;
+    res.cookie('username', username);
     next();
   }
   catch(err) {

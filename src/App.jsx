@@ -7,8 +7,6 @@ import FavoriteListContainer from './containers/FavoriteListContainer.jsx';
 
 function App () {
   const [loggedIn, setLoggedIn] = useState(false);
-
-
   // if (loggedIn === false) {
   //   return (
   //     <Login />

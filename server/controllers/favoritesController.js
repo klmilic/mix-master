@@ -17,12 +17,12 @@ const favoritesController = {};
 
 
 favoritesController.getFavorites = async (req, res, next) => {
-    const { username } = req.params;
+    const { username } = req.cookies;
     const values = [username];
   
     const query = `SELECT favourites
     FROM users
-    WHERE userid = $1`
+    WHERE username = $1`
   
     try {
       const { rows } = await db.query(query, values);

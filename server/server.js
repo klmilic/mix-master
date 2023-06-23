@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
 const loginRouter = require('./routers/loginRouter');
 const favoritesRouter = require('./routers/favoritesRouter');
 require('dotenv').config();
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 // route for login-related requests
 // also create mongo db entry to store any favorites
 // app.use('/login', loginRouter);
+app.use(cookieParser());
 app.use('/api', loginRouter);
 app.use('/favorites', favoritesRouter);
 

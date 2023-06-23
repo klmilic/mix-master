@@ -19,7 +19,7 @@ function Input({ changeSearch, searchState, setSearchState }) {
         setSearchState(
           true
         );
-        console.log(searchState);
+        // console.log(searchState);
         setSearchValue('');
     }
   }
