@@ -1,24 +1,45 @@
 const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/index.js',
-
   output: {
-    path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
-
   plugins: [
-    new HTMLWebpackPlugin({
+    new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
   ],
-
+  devServer: {
+    // host: 'localhost',
+    // port: 8080,
+    // hot: true,
+    allowedHosts: 'all',
+    // static: {
+    //   directory: path.resolve(__dirname, 'dist'),
+    //   publicPath: '/dist',
+    // },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false,
+        
+      },
+    },
+    headers: {
+      'Access-Control-Allow-Origin': 'http://localhost:8080',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'X-Requested-With, content-type, Authorization',
+    },
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -28,28 +49,25 @@ module.exports = {
         },
       },
       {
-        test: /\s?css$/,
-        exclude: /node_modules/,
+        test: /\.css/,
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.png$/i,
-        type: "asset/resource",
-        use: {
-          loader: 'file-loader',
-        },
-      }
-    ]
-  },
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, 'dist'),
-      publicPath: '/dist'
-    },
-    compress: true,
-    port: 8080,
-    proxy: {
-      '/api': 'http://localhost:3000',
-    },
+        test: /\.(png|jpe?g|gif)$/i,
+
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+          }
+          },
+        ],
+      },
+      {         
+      test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: 'file-loader'
+      },
+    ],
   },
 };

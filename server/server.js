@@ -4,7 +4,7 @@ const app = express();
 const loginRouter = require('./routers/loginRouter');
 const favoritesRouter = require('./routers/favoritesRouter');
 
-const PORT = 3000;
+const PORT = process.env.PORT | 3000;
 
 // parse incoming requests with JSON payloads- automatically parse the JSON data in the request body and make it available in req.body
 app.use(express.json());
@@ -13,7 +13,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // handle requests to static files
-app.use(express.static(path.resolve(__dirname, '../src')));
+app.use(express.static(path.join(__dirname, '../dist')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+});
 
 // route for login-related requests
 // also create mongo db entry to store any favorites
