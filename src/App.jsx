@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, Redirect } from 'react-router-dom';
-import SideBar from './components/SideBar.jsx';
+import SideBar from './components/sideBar.jsx';
 import MainContainer from './containers/MainContainer.jsx';
 import Login from './components/Login.jsx'
 import Signup from './components/Signup.jsx';
@@ -25,7 +25,8 @@ function App () {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<div id='app'><SideBar /> <MainContainer /> </div>} />
+        <Route path="/" element={<div id='app'><SideBar /> <MainContainer /></div>} />
+        <Route path="/search" element={<div id='app'><SideBar /> <MainContainer /></div>} />
         <Route path="/signup" element={<Signup />} /> 
         <Route path="/favorites" element={<SideBar /> } /> 
       </Routes>

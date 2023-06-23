@@ -14,7 +14,6 @@ function RecipeContainer(props) {
 
 
   useEffect(() => {
-    
     const fetch1 = fetch(`https://api.api-ninjas.com/v1/cocktail?name=${props.search}`, options)
     .then(response => response.json());
     const fetch2 = fetch(`https://api.api-ninjas.com/v1/cocktail?ingredients=${props.search}`, options)

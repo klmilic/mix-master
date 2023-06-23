@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle&family=MedievalSharp&family=Roboto&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@500&display=swap');
 
 body {
   margin: 0px;
-  background: linear-gradient(0deg, rgba(42,42,42,1) 0%, rgba(0,0,0,1) 100%);
+  background-color: rgb(45, 18, 59);
+  /* background: linear-gradient(0deg, rgba(42,42,42,1) 0%, rgba(0,0,0,1) 100%); */
 }
-
 
 #root {
   height: 99vh;
@@ -17,14 +17,19 @@ body {
   width: 200px;
   border: none; 
   padding: 10px 0px 10px 0px;
-  font-size: 30px;
+  font-size: 20px;
   background-color: transparent;
-  font-family: 'MedievalSharp', cursive;
+  font-family: 'Inter', sans-serif;
   font-weight: bold;
   color: rgb(255, 255, 255);
-  text-shadow: 0px 0px 7px #ffffff;
+  /* text-shadow: 0px 0px 7px #ffffff; */
   vertical-align: center;
   letter-spacing: 1px;
+}
+
+.sideBarButton button:hover {
+  background-color: black;
+  border-radius: 4px;
 }
 
 #app {
@@ -49,7 +54,10 @@ body {
   align-items: center;
   gap: 10px;
   padding-top: 20px;
+}
 
+button {
+  cursor: pointer;
 }
 
 .favButtons {
@@ -75,36 +83,39 @@ body {
 }
 
 .searchItems{
+  background-color: pink;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 60px;
-  font-family: 'MedievalSharp', cursive;
+  font-family: 'Montserrat', sans-serif;
   color: white;
-  text-shadow: 0px 0px 8px #ffffff;
+  text-shadow: 0px 0px 8px #ffffff; 
   gap: 20px;
 }
 
 .searchInput{
   width: 50vw;
-  font-size: 30px;
-  height: 1.25em;
+  font-size: 16px;
   outline: none;
   border: none;
   border-radius: 20px;
   padding-left: 10px;
   box-sizing: border-box;
   box-shadow: 0px 0px 5px rgb(255, 255, 255);
-  font-family: 'MedievalSharp', cursive;
+  font-family: 'Inter', sans-serif;
+  padding: 10px;
 }
 
 .searchInput.active{
-  width: 30%;
+  width: 50%;
   outline: none;
   position: fixed;
   top: 8px;
   order: 1;
-  font-family: 'MedievalSharp', cursive;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 20px;
 }
 
 #recipeContainer {
@@ -112,7 +123,7 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
-  padding-top: 30px;
+  /* padding-top: 30px; */
 }
 
 .recipe-card {
@@ -120,11 +131,12 @@ body {
   height: auto;
   display: flex;
   flex-direction: column;
+  gap: 15px;
   border: none;
   border-radius: 20px;
   background-color: rgba(228, 228, 228, 0.75);
   padding: 10px;
-  font-family: 'MedievalSharp', cursive;
+  font-family: 'Inter', sans-serif;
   box-shadow: 0px 0px 3px rgb(255, 255, 255);
   /* justify-content: center; */
 }
@@ -161,4 +173,13 @@ body {
 
 .signupPage input {
   width: 100px;
+}
+
+.img-container {
+  height: 200px;
+  width: 200px;
+}
+
+.img-container img {
+  width: 100%;
 }

@@ -2,28 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function SideBar() {
-  function toHome() {
-    console.log(`I'm Home`);
-  }
 
-  function toFavs() {
-    console.log(`I'm in Favs`);
+  const handleClick = () => {
+    window.location.reload();
   }
-
 
   return (
     <div id='sideBar'>
       <div className='sideBarButton'>
-      <div>Mix-Master</div>
         <Link to="/">
-          <button onClick={toHome}>Home</button>
+          <button onClick={handleClick}>Home</button>
         </Link>
         <Link to="/favorites">
-          <button onClick={toFavs}>Favorites</button>
+          <button>Favorites</button>
         </Link>
-        <Link to="/login">
-          <button>Login</button>
-        </Link>
+        <img src="https://em-content.zobj.net/source/microsoft-teams/337/tropical-drink_1f379.png" width="50px"/>
       </div>
     </div>
   )

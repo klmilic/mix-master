@@ -1,8 +1,7 @@
 // model for SQL database
 const { Pool } = require('pg');
 
-const PG_URI =
-  'postgres://syzthmxl:93sRWq3RM1d6HIcFdMUPUdZsPqdkHsCs@mahmud.db.elephantsql.com/syzthmxl';
+const PG_URI = process.env.PG_URI;
 
 // pool -
 const pool = new Pool({

@@ -19,17 +19,16 @@ function RecipeCard(props) {
         ))}
         {/* {console.log(props.recipeData.ingredients)} */}
         </ul>
-        <ol>Instructions:
+        <ul><strong>Instructions:</strong>
         {props.recipeData.instructions.split('. ').map(ins => (
           <li>
             {ins.replace('.','').concat('.')}
           </li>
         ))}
         {/* {console.log(props.recipeData.instructions.split('. '))} */}
-        </ol>
+        </ul>
     </div>
   )
 }
-
 
 export default RecipeCard;
