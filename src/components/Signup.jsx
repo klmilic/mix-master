@@ -8,12 +8,6 @@ function Signup ({ setLoggedIn }) {
 
   const signupFunc = () => {
 
-    // console.log(JSON.stringify({
-    //     username: username.current.value,
-    //     password: password.current.value,
-    //     firstname: firstName.current.value
-    //   }));
-
     if (username.current.value === '' || password.current.value === '') {
       alert('Username and password fields must not be empty.');
       return;

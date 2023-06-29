@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Sidebar from '../components/Sidebar.jsx';
 import RecipeContainer from './RecipeContainer.jsx';
-import RecipeCard from '../components/RecipeCard.jsx';
+import FavoritesCard from '../components/FavoritesCard.jsx';
 import { Link } from 'react-router-dom';
 
 function FavoriteListContainer({ loggedIn }) {
@@ -18,47 +18,49 @@ function FavoriteListContainer({ loggedIn }) {
   const favoritesArray = [];
 
   useEffect(() => {
-    if(favorites) return;
+    if(favorites.length) return;
     // get favorites
     fetch('/favorites/getFavorites')
       .then(response => response.json())
       .then(data => {
-        // console.log('favorites data: ', data);
-        for (let i = 0; i < data[0].favourites.length; i++) {
-          fetch(`https://api.api-ninjas.com/v1/cocktail?name=${data[0].favourites[i]}`, options)
-            .then(response => response.json())
-            .then(data => {
-              // append card component to array
-              favoritesArray.push(<RecipeCard recipeData={data}></RecipeCard>)
-            })
+        console.log('favorites data: ', data);
+        for (let i = 0; i < data.length; i++) {
+          favoritesArray.push(<FavoritesCard recipeData={data[i]}></FavoritesCard>)
         }
-        setFavorites(favoritesArray);
+        setFavorites(data);
         setIsLoading(false);
-        // console.log('favorites array : ', favoritesArray);
       })
       .catch(err => console.log('Error in fetching favorites: ', err))
-  });
+  }, [isLoading]);
+
+  const components = 
+  <div className='favContainer'>
+    {/* <div>MainContainer</div> */}
+    <Sidebar></Sidebar>
+    <div id="fav-container">
+    <div className="flex">
+      <h2>My Favorites</h2>
+    </div>
+    {favorites.length > 0 ? (
+        <ul id="recipes">
+          {favorites.map(item => (
+            <FavoritesCard recipeData={item} />
+          ))}
+        </ul>
+      ) : (
+        <div></div>
+      )}
+    </div>
+  </div>
 
   // if logged in, return list of favourites
   if (loggedIn) {
-
-    {isLoading ? <div></div> : <div></div>}
-    return (
-      <div className='favContainer'>
-        {/* <div>MainContainer</div> */}
-        <Sidebar></Sidebar>
-        <div>
-          <h2>My Favorites</h2>
-        </div>
-        <div id="recipe-container">
-          {favoritesArray}
-        </div>
-      </div>
-    )
+    if (isLoading) return <Sidebar></Sidebar>;
+    else return components;
   }
 
   else return(
-    <div className='favContainer'>
+    <div className='login-container'>
         {/* <div>MainContainer</div> */}
         <Sidebar></Sidebar>
         <div id="favorites">

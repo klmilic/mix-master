@@ -11,7 +11,7 @@ router.get('/getFavorites', favoritesController.getFavorites, (req, res) => {
   });
 
 router.post('/addRecipe', favoritesController.addRecipe, (req, res) => {
-  res.status(200).json();
+  res.status(200).json('Successfully added recipe');
 });
 
 module.exports = router;

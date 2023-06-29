@@ -43,6 +43,10 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+});
+
 // start server
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);

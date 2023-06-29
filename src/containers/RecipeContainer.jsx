@@ -36,7 +36,7 @@ function RecipeContainer(props) {
       {data.length > 0 ? (
         <ul id="recipes">
           {data.map(item => (
-            <RecipeCard recipeData={item} />
+            <RecipeCard recipeData={item} key={item.name} loggedIn={props.loggedIn}/>
           ))}
         </ul>
       ) : (

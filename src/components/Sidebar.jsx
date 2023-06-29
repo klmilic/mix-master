@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 
 function Sidebar() {
 
-  const handleClick = () => {
-    window.location.reload();
-  }
-
   return (
     <div id='sideBar'>
       <div className='sideBarButton'>

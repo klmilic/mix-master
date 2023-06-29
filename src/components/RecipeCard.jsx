@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { FaStar } from "react-icons/fa";;
+import { FaStar } from "react-icons/fa";
 
 function RecipeCard(props) {
   const [isStarred, setIsStarred] = useState(false);
 
-  const handleClick = (cocktailName) => {
+  const handleClick = (cocktailName, ingredients, instructions) => {
+    if (!props.loggedIn) {
+      alert('Please login to add a recipe to your favorites.');
+      return;
+    }
     isStarred ? setIsStarred(false) : setIsStarred(true);
     fetch('/favorites/addRecipe', {
 			method: 'POST',
@@ -13,7 +17,9 @@ function RecipeCard(props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        cocktailName: cocktailName
+        name: cocktailName,
+        ingredients: ingredients,
+        instructions: instructions
       })
     })
       .then(response => response.json())
@@ -27,10 +33,10 @@ function RecipeCard(props) {
     <div className='recipe-card'>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
           <h2>{props.recipeData.name}</h2> 
-          {/* <FaStar
+          <FaStar
           style={{ marginLeft: "10px", cursor: "pointer", color: isStarred ? "gold" : "grey" }}
-          onClick={() => handleClick(props.recipeData.name)}
-          /> */}
+          onClick={() => handleClick(props.recipeData.name, props.recipeData.ingredients, props.recipeData.instructions)}
+          />
         </div>
         <ul><strong>Ingredients:</strong>
         {props.recipeData.ingredients.map(ing => (
