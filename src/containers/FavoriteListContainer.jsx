@@ -19,11 +19,11 @@ function FavoriteListContainer({ loggedIn }) {
 
   useEffect(() => {
     if(favorites.length) return;
+    if(!loggedIn) return;
     // get favorites
     fetch('/favorites/getFavorites')
       .then(response => response.json())
       .then(data => {
-        console.log('favorites data: ', data);
         for (let i = 0; i < data.length; i++) {
           favoritesArray.push(<FavoritesCard recipeData={data[i]}></FavoritesCard>)
         }
